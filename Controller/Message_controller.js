@@ -17,18 +17,22 @@ const send_message = async (req, res) => {
     phone,
     message,
   });
+
   //   save the message to the database
   newMessage
     .save()
     .then((message) => {
       res.status(201).json({
+        success: true,
         message: "Message sent successfully",
         data: message,
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error.message);
       res.status(500).json({
+        success: false,
+        reason: error.message,
         message: "Failed to send message",
       });
     });
