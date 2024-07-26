@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const UserSchema = new Schema(
   {
@@ -47,8 +48,8 @@ const UserSchema = new Schema(
     role: {
       type: String,
       required: true,
-      enum: ["User", "Doctor", "Admin"],
-      default: "User",
+      enum: ["Patient", "Doctor", "Admin"],
+      default: "Patient",
     },
     doctor_deperment: {
       type: String,
