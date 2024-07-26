@@ -6,7 +6,8 @@ import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import mongoDB_connection from "./Database/database_connection.js";
 import { v2 as cloudinary } from "cloudinary";
-import router from "./Router/Router.js";
+import Message_router from "./Router/Message_Router.js";
+import User_Router from "./Router/User_Router.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -41,7 +42,8 @@ app.use(
   })
 );
 // Routes
-app.use("/api/v1/message", router);
+app.use("/api/v1/message", Message_router);
+app.use("/api/v1/user", User_Router);
 
 //  Api
 

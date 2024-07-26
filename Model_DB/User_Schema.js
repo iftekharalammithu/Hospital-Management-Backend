@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import validator from "validator";
+import bcrypt from "bcrypt";
 
 const UserSchema = new Schema(
   {
@@ -47,7 +48,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       enum: ["User", "Doctor", "Admin"],
-      default: "user",
+      default: "User",
     },
     doctor_deperment: {
       type: String,
@@ -60,18 +61,18 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-// add a function that decrypt the password with bcryptjs  before save in database
+// add a function that decrypt the password with bcrypt  before save in database
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  const salt = await bcryptjs.genSalt(10);
-  this.password = await bcryptjs.hash(this.password, salt);
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
-// add a function that compare the password with bcryptjs  before login
+// add a function that compare the password with bcrypt  before login
 UserSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcryptjs.compare(enteredPassword, this.password);
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 // generate the json web token

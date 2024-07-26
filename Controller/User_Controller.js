@@ -1,4 +1,4 @@
-import User from "../Model_DB/User_Schema";
+import User from "../Model_DB/User_Schema.js";
 
 const patient_Regester = async (req, res) => {
   try {
@@ -71,3 +71,5 @@ const patient_Regester = async (req, res) => {
     });
   }
 };
+
+export { patient_Regester };
