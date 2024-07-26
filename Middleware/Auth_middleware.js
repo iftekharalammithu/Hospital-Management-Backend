@@ -22,4 +22,25 @@ const is_Admin_authenticated = async (req, res, next) => {
   next();
 };
 
-export { is_Admin_authenticated };
+const is_Patient_authenticated = async (req, res, next) => {
+  const token = req.cookies.patientToken;
+
+  if (!token) {
+    return res.status(401).json({ message: "Patient Not Authorized!" });
+  }
+
+  const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+  if (!verifyToken) {
+    return res.status(401).json({ message: "Invalid Token!" });
+  }
+  req.user = await User.findById(verifyToken.id);
+
+  if (req.user.role !== "Patient") {
+    return res
+      .status(401)
+      .json({ message: `${req.user.role} is not Authorize to Login` });
+  }
+  next();
+};
+
+export { is_Admin_authenticated, is_Patient_authenticated };
