@@ -47,4 +47,30 @@ const send_message = async (req, res) => {
   }
 };
 
-export default send_message;
+// make a function to get all message
+const get_all_message = async (req, res) => {
+  try {
+    const messages = await Message.find();
+
+    if (!messages) {
+      return res.status(400).json({
+        success: false,
+        message: "No messages found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: messages,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({
+      success: false,
+      reason: error.message,
+      message: "Failed to get messages",
+    });
+  }
+};
+
+export { send_message, get_all_message };

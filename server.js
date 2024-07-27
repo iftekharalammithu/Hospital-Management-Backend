@@ -8,6 +8,7 @@ import mongoDB_connection from "./Database/database_connection.js";
 import Message_router from "./Router/Message_Router.js";
 import User_Router from "./Router/User_Router.js";
 import { v2 as cloudinary } from "cloudinary";
+import appointment_router from "./Router/Appointment_Router.js";
 
 // Configure Cloudinary using environment variables
 cloudinary.config({
@@ -45,6 +46,7 @@ app.use(
 // Routes
 app.use("/api/v1/message", Message_router);
 app.use("/api/v1/user", User_Router);
+app.use("/api/v1/appintment", appointment_router);
 
 //  Api
 
