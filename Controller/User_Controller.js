@@ -290,8 +290,9 @@ const patient_logout = async (req, res) => {
 };
 
 const add_new_Doctor = async (req, res) => {
+  // console.log(req.files.image);
   // make a if condition that varify the req.file exist or not
-  if (!req.file) {
+  if (!req.files) {
     return res.status(400).json({
       success: false,
       message: "Please upload Doctor Picture",
@@ -320,7 +321,6 @@ const add_new_Doctor = async (req, res) => {
     !dob ||
     !nid ||
     !gender ||
-    !doctor_avtar ||
     !doctor_deperment ||
     !password
   ) {
@@ -340,10 +340,10 @@ const add_new_Doctor = async (req, res) => {
 
   //   allow image only jpeg,png,webp,jpg
   if (
-    req.file.mimetype !== "image/jpeg" &&
-    req.file.mimetype !== "image/png" &&
-    req.file.mimetype !== "image/webp" &&
-    req.file.mimetype !== "image/jpg"
+    req.files.image.mimetype !== "image/jpeg" &&
+    req.files.image.mimetype !== "image/png" &&
+    req.files.image.mimetype !== "image/webp" &&
+    req.files.image.mimetype !== "image/jpg"
   ) {
     return res.status(400).json({
       success: false,
@@ -351,18 +351,17 @@ const add_new_Doctor = async (req, res) => {
     });
   }
 
-  // upload the file to cloudinary
+  // // upload the file to cloudinary
   const image_upload = await cloudinary.uploader.upload(
-    req.file.path,
-    (error, result) => {
-      if (error) {
-        return res.status(500).json({
-          success: false,
-          message: "Failed to upload image",
-        });
-      }
-    }
+    req.files.image.tempFilePath
   );
+
+  if (!image_upload) {
+    return res.status(400).json({
+      success: false,
+      message: "Image Not Uploaded",
+    });
+  }
 
   const new_Doctor = new User({
     firstName,
@@ -372,18 +371,25 @@ const add_new_Doctor = async (req, res) => {
     dob,
     nid,
     gender,
-    role,
+    role: "Doctor",
     password,
-    doctor_avtar,
+    doctor_avtar: {
+      public_id: image_upload.public_id,
+      url: image_upload.secure_url,
+    },
     doctor_deperment,
   });
 
-  // save the user to the database
+  // // save the user to the database
   await new_Doctor.save().catch((error) => {
     res.status(500).json({
       success: false,
       message: "Failed to create doctor",
     });
+  });
+  res.status(200).json({
+    success: true,
+    message: "Add New Doctor Successfully",
   });
 };
 
@@ -395,4 +401,5 @@ export {
   get_user_data,
   admin_logout,
   patient_logout,
+  add_new_Doctor,
 };

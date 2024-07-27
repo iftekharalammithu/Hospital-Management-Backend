@@ -1,6 +1,7 @@
 import express from "express";
 import {
   add_new_admin,
+  add_new_Doctor,
   admin_logout,
   get_all_doctor,
   get_user_data,
@@ -23,5 +24,6 @@ User_Router.get("/admin/me", is_Admin_authenticated, get_user_data);
 User_Router.get("/patient/me", is_Patient_authenticated, get_user_data);
 User_Router.get("/admin/logout", is_Admin_authenticated, admin_logout);
 User_Router.get("/patient/logout", is_Patient_authenticated, patient_logout);
+User_Router.post("/adddoctor", is_Admin_authenticated, add_new_Doctor);
 
 export default User_Router;

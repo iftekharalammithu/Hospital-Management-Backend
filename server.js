@@ -5,21 +5,22 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import mongoDB_connection from "./Database/database_connection.js";
-import { v2 as cloudinary } from "cloudinary";
 import Message_router from "./Router/Message_Router.js";
 import User_Router from "./Router/User_Router.js";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary using environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 // FileUpload Configaration
 // cloudinaryConfig.js
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET_KEY,
-});
 
 // Configaration
 app.use(express.json());
