@@ -17,23 +17,23 @@
 </p>
 <hr>
 
-## Quick Links
+## 🔗 Quick Links
 
-> - [ Overview](#-overview)
-> - [ Repository Structure](#-repository-structure)
-> - [ Modules](#-modules)
-> - [ Getting Started](#-getting-started)
->   - [ Installation](#-installation)
->   - [ Running Hospital-Management-Backend](#-running-Hospital-Management-Backend)
->   - [ Tests](#-tests)
-> - [ Project Roadmap](#-project-roadmap)
-> - [ Contributing](#-contributing)
-> - [ License](#-license)
-> - [ Acknowledgments](#-acknowledgments)
+> - [📍 Overview](#-overview)
+> - [📂 Repository Structure](#-repository-structure)
+> - [🧩 Modules](#-modules)
+> - [🚀 Getting Started](#-getting-started)
+>   - [⚙️ Installation](#️-installation)
+>   - [🤖 Running Hospital-Management-Backend](#-running-Hospital-Management-Backend)
+>   - [🧪 Tests](#-tests)
+> - [🛠 Project Roadmap](#-project-roadmap)
+> - [🤝 Contributing](#-contributing)
+> - [📄 License](#-license)
+> - [👏 Acknowledgments](#-acknowledgments)
 
 ---
 
-## Overview
+## 📍 Overview
 
 This project implements the backend for a hospital management system. It provides functionalities for managing hospital operations, including: (Replace or add functionalities based on your project's scope)
 
@@ -45,7 +45,7 @@ This project implements the backend for a hospital management system. It provide
 
 ---
 
-## Repository Structure
+## 📂 Repository Structure
 
 ```sh
 └── Hospital-Management-Backend/
@@ -75,7 +75,7 @@ This project implements the backend for a hospital management system. It provide
 
 ---
 
-## Modules
+## 🧩 Modules
 
 <details closed><summary>Server</summary>
 
@@ -186,13 +186,13 @@ This section details the available API endpoints for your project. The format is
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 **_Requirements_**
 
 Ensure you have the following dependencies installed on your system:
 
-### Installation
+### ⚙️ Installation
 
 1. Clone the Hospital-Management-Backend repository:
 
@@ -212,7 +212,7 @@ cd Hospital-Management-Backend
 npm install
 ```
 
-### Running Hospital-Management-Backend
+### 🤖 Running Hospital-Management-Backend
 
 Use the following command to run Hospital-Management-Backend:
 
@@ -220,7 +220,7 @@ Use the following command to run Hospital-Management-Backend:
 node app.js
 ```
 
-### Tests
+### 🧪 Tests
 
 To execute tests, run:
 
@@ -230,15 +230,7 @@ npm test
 
 ---
 
-## Project Roadmap
-
-- [x] `► INSERT-TASK-1`
-- [ ] `► INSERT-TASK-2`
-- [ ] `► ...`
-
----
-
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Here are several ways you can contribute:
 
