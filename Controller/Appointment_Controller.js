@@ -19,6 +19,22 @@ const post_appointment = async (req, res) => {
     has_visited,
   } = req.body;
 
+  console.log(
+    firstName,
+    lastName,
+    email,
+    phone,
+    dob,
+    nid,
+    gender,
+    appointment_date,
+    deperment,
+    doctor_firstname,
+    doctor_lastname,
+    address,
+    has_visited
+  );
+
   // check all the value are fullfil or Notification. if not return a response
   if (
     !firstName ||

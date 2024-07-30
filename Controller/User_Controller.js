@@ -292,6 +292,7 @@ const patient_logout = async (req, res) => {
 const add_new_Doctor = async (req, res) => {
   // console.log(req.files.image);
   // make a if condition that varify the req.file exist or not
+  // console.log(req);
   if (!req.files) {
     return res.status(400).json({
       success: false,
@@ -307,7 +308,6 @@ const add_new_Doctor = async (req, res) => {
     dob,
     nid,
     gender,
-    role,
     password,
     doctor_avtar,
     doctor_deperment,
@@ -340,10 +340,10 @@ const add_new_Doctor = async (req, res) => {
 
   //   allow image only jpeg,png,webp,jpg
   if (
-    req.files.image.mimetype !== "image/jpeg" &&
-    req.files.image.mimetype !== "image/png" &&
-    req.files.image.mimetype !== "image/webp" &&
-    req.files.image.mimetype !== "image/jpg"
+    req.files.doctor_pic.mimetype !== "image/jpeg" &&
+    req.files.doctor_pic.mimetype !== "image/png" &&
+    req.files.doctor_pic.mimetype !== "image/webp" &&
+    req.files.doctor_pic.mimetype !== "image/jpg"
   ) {
     return res.status(400).json({
       success: false,
@@ -353,7 +353,7 @@ const add_new_Doctor = async (req, res) => {
 
   // // upload the file to cloudinary
   const image_upload = await cloudinary.uploader.upload(
-    req.files.image.tempFilePath
+    req.files.doctor_pic.tempFilePath
   );
 
   if (!image_upload) {
@@ -381,16 +381,28 @@ const add_new_Doctor = async (req, res) => {
   });
 
   // // save the user to the database
-  await new_Doctor.save().catch((error) => {
-    res.status(500).json({
-      success: false,
-      message: "Failed to create doctor",
+  await new_Doctor
+    .save()
+    .then((data) => {
+      res.status(200).json({
+        success: true,
+        message: "Add New Doctor Successfully",
+      });
+    })
+
+    .catch((error) => {
+      console.log(error);
+
+      res.status(500).json({
+        success: false,
+        message: "Failed to create doctor",
+      });
     });
-  });
-  res.status(200).json({
-    success: true,
-    message: "Add New Doctor Successfully",
-  });
+
+  // res.status(200).json({
+  //   success: true,
+  //   message: "Add New Doctor Successfully",
+  // });
 };
 
 export {
