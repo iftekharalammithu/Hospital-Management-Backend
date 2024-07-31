@@ -19,22 +19,6 @@ const post_appointment = async (req, res) => {
     has_visited,
   } = req.body;
 
-  console.log(
-    firstName,
-    lastName,
-    email,
-    phone,
-    dob,
-    nid,
-    gender,
-    appointment_date,
-    deperment,
-    doctor_firstname,
-    doctor_lastname,
-    address,
-    has_visited
-  );
-
   // check all the value are fullfil or Notification. if not return a response
   if (
     !firstName ||
@@ -96,6 +80,7 @@ const post_appointment = async (req, res) => {
     },
     doctor_id,
     patient_id,
+    has_visited,
     address,
   });
   // save the appointment object to database
@@ -148,8 +133,8 @@ const get_all_appointment = async (req, res) => {
 const update_appointment_by_patient_id = async (req, res) => {
   try {
     const { appointment_id } = req.params;
-    console.log(appointment_id);
     const { status } = req.body;
+    // console.log(appointment_id, status);
 
     if (!status) {
       return res.status(400).json({
